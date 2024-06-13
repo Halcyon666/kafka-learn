@@ -15,13 +15,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Slf4j
+@SuppressWarnings("all")
 public class ConsumerService {
     @KafkaListener(topics = "baeldung", groupId = "my-group0")
     public void listen() {
         log.info("received message in simple listener");
     }
 
-/*    @KafkaListener(topics = "baeldung", groupId = "my-group1")
+   @KafkaListener(topics = "baeldung", groupId = "my-group1")
     public void listenWithPayLoad(@Payload String message) {
         log.info("received message, Payload: {}", message);
     }
@@ -43,15 +44,12 @@ public class ConsumerService {
         log.info("Received Message with initialOffset 100, message: {}, from partition: {}", message, partition);
     }
 
-
-    *//**
-     * In this listener, all the messages matching the filter will be discarded.
-     *//*
+    // In this listener, all the messages matching the filter will be discarded.
     @KafkaListener(
             topics = "baeldung",
             groupId = "my-group3",
             containerFactory = "filterKafkaListenerContainerFactory")
     public void listenWithFilter(String message) {
         log.info("Received Message in filtered listener: {}", message);
-    }*/
+    }
 }
